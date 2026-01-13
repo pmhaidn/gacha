@@ -71,7 +71,7 @@ def load_data(base_dir):
 
     return dfs
 
-base_dir = '/Users/mac/Downloads/doc'
+base_dir = '.'
 dfs = load_data(base_dir)
 
 if not all(k in dfs for k in ['gacha_card', 'gacha_history', 'inventory', 'profile']):
