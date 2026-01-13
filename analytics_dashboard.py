@@ -705,7 +705,7 @@ elif view_mode == "🏆 Thống kê Server":
             st.dataframe(
                 first_150[display_cols],
                 column_config={
-                    "created_at": "Thời gian",
+                    "created_at": st.column_config.DatetimeColumn("Thời gian (UTC+7)", format="YYYY-MM-DD HH:mm:ss"),
                     "user_id": "Người sở hữu",
                     "name": "Tên thẻ UR",
                     "is_pity_reward": "Từ Pity?",
