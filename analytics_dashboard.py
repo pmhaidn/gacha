@@ -701,12 +701,19 @@ elif view_mode == "🏆 Thống kê Server":
             first_150 = ur_history.head(150).reset_index(drop=True)
             first_150.index += 1
             
-            display_cols = ['created_at', 'user_id', 'name', 'is_pity_reward', 'is_merged']
+            # Merge with user profile to get phone number
+            if 'profile' in dfs:
+                first_150 = first_150.merge(dfs['profile'][['user_id', 'phone']], on='user_id', how='left')
+            else:
+                first_150['phone'] = 'N/A'
+            
+            display_cols = ['created_at', 'user_id', 'phone', 'name', 'is_pity_reward', 'is_merged']
             st.dataframe(
                 first_150[display_cols],
                 column_config={
                     "created_at": st.column_config.DatetimeColumn("Thời gian (UTC+7)", format="YYYY-MM-DD HH:mm:ss"),
                     "user_id": "Người sở hữu",
+                    "phone": "SĐT",
                     "name": "Tên thẻ UR",
                     "is_pity_reward": "Từ Pity?",
                     "is_merged": "Từ Merge?"
